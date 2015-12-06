@@ -29,7 +29,7 @@ class Machine: #Création de notre objet Machine
     # Méthode qui renvoie la pièce à l'autre machine
     def renvoyerPiece(self):
         pass
-    
+
     # Méthode qui récupère une pièce.
     def recevoirPiece(self):
         # Récupère une pièce dans la file
