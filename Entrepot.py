@@ -2,61 +2,87 @@
 # -*- coding: utf8 -*-
 import os
 import sys
-# import nÈcessaire ‡ la crÈation de l'interface graphique
-import tkinter
+# import n√©cessaire √† la cr√©ation de l'interface graphique
+from tkinter import *
 
-class Entrepot: #CrÈation de l'objet EntrepÙt
+class Entrepot: #Cr√©ation de l'objet Entrep√¥t
 
-    # Contruction de l'EntrepÙt, qui comporte une taille maximale.
-    def __init__(self, tailleMax): # Construit un entrepÙt
+    # Contruction de l'Entrep√¥t, qui comporte une taille maximale.
+    def __init__(self, tailleMax): # Construit un entrep√¥t
         self.tailleMax = tailleMax
 
     def increaseA(self):
-        # Fonction servant ‡ incrÈmenter la valeur du compteur A afin que sa valeur puisse Ítre mise ‡ jour pour l'ensemble de la procÈdure.
+        # Fonction servant √† incr√©menter la valeur du compteur A afin que sa valeur puisse √™tre mise √† jour pour l'ensemble de la proc√©dure.
         global comptA # Python recherche la valeur du compteur en dehors de l'espace local de la fonction.
         comptA += 1
 
     def increaseB(self):
-        # Fonction servant ‡ incrÈmenter la valeur du compteur B.
+        # Fonction servant √† incr√©menter la valeur du compteur B.
         global comptB
         comptB += 1
 
     def increaseC(self):
-        # Fonction servant ‡ incrÈmenter la valeur du compteur C.
+        # Fonction servant √† incr√©menter la valeur du compteur C.
         global comptC
         comptC += 1
 
-    # MÈthode qui rÈcupËre les piËces traitÈes par les machines (qui ont ÈtÈ modifiÈes en rÈsultats de type rA/rB/rC prÈcedemment), et incrÈmente le compteur liÈ
-    def recuperationPiece(self,Piece,compteurA,compteurB,compteurC):
-        if Piece.type == 'rA':
+    # M√©thode qui r√©cup√®re les pi√®ces trait√©es par les machines (qui ont √©t√© modifi√©es en r√©sultats de type rA/rB/rC pr√©cedemment), et incr√©mente le compteur li√©
+    def actualiserInterface(self):
+        global typ
+        if typ == 'rA':
             entrepot.increaseA()
-        elif Piece.type == 'rB':
+        elif typ == 'rB':
             entrepot.increaseB()
-        elif Piece.type == 'rC':
+        elif typ == 'rC':
             entrepot.increaseC()
+        else:
+            print('Pi√®ce qui non reconnue')
+        Texte.set("\n Le nombre de pi√®ces de type A qui ont √©t√© trait√©es est de : " + str(comptA) + "\n \nTaux de remplissage : " + str((comptA/entrepot.tailleMax)*100) + "%\n")
+        Texte2.set("\n Le nombre de pi√®ces de type B qui ont √©t√© trait√©es est de : " + str(comptB) + "\n \nTaux de remplissage : " + str((comptB/entrepot.tailleMax)*100) + "%\n")
+        Texte3.set("\n Le nombre de pi√®ces de type C qui ont √©t√© trait√©es est de : " + str(comptC) + "\n \nTaux de remplissage : " + str((comptC/entrepot.tailleMax)*100) + "%\n")
+        
+    def initialisationInterface(self):
+        Texte.set("\n Le nombre de pi√®ces de type A qui ont √©t√© trait√©es est de : " + str(comptA) + "\n \nTaux de remplissage : " + str((comptA/entrepot.tailleMax)*100) + "%\n")
+        Texte2.set("\n Le nombre de pi√®ces de type B qui ont √©t√© trait√©es est de : " + str(comptB) + "\n \nTaux de remplissage : " + str((comptB/entrepot.tailleMax)*100) + "%\n")
+        Texte3.set("\n Le nombre de pi√®ces de type C qui ont √©t√© trait√©es est de : " + str(comptC) + "\n \nTaux de remplissage : " + str((comptC/entrepot.tailleMax)*100) + "%\n")
 
-    # Affichage graphique du stocks des rÈsultats au sein de l'entrepÙt
-    def affichageGraphique(self,compteurA,compteurB,compteurC,taille_max):
-        #Cr√©ation de la fenÍtre "resume_entrepot"
-        resume_entrepot = Tk()
-        resume_entrepot.title("EntrepÙt")
-        #SpÈcification de la fenÍtre, et sÈparation en 3 labels distincts pour sÈparer les 3 types de piËces
-        p = PanedWindow(resume_entrepot, orient=HORIZONTAL)
-        p.pack(side=TOP, expand=Y, fill=BOTH, pady=2, padx=2)
-        # Label des piËces A
-        p.add(Label(p, text="\n Le nombre de piËces de type A qui ont ÈtÈ traitÈes est de : " + str(compteurA) + "\n \nTaux de remplissage : " + str((compteurA/taille_max)*100) + "%\n", background='blue', anchor=CENTER))
-        # Label des piËces B
-        p.add(Label(p, text="\n Le nombre de piËces de type B qui ont ÈtÈ traitÈes est de : " + str(compteurB) + "\n \nTaux de remplissage : " + str((compteurB/taille_max)*100) + "%\n", background='red', anchor=CENTER))
-        # Label des piËces C
-        p.add(Label(p, text="\n Le nombre de piËces de type C qui ont ÈtÈ traitÈes est de : " + str(compteurC) + "\n \nTaux de remplissage : " + str((compteurC/taille_max)*100) + "%\n", background='lightgreen', anchor=CENTER))
-        p.pack()
-    
-# Construction de l'entrepÙt nommÈ "entrepot", et qui comporte comme seul paramËtre sa taille (calculÈe auparavent, le 10 n'est qu'un exemple).
+
+# ----- MAIN PROGRAM ----- #
+
+# Construction de l'entrep√¥t nomm√© "entrepot", et qui comporte comme seul param√®tre sa taille (calcul√©e auparavent, le 10 n'est qu'un exemple).
 entrepot = Entrepot(10);
 comptA=0;
 comptB=0;
 comptC=0;
-# Appel ‡ la fonction de rÈception d'un rÈsultat
-# entrepot.recuperationPiece(resultat,comptA,comptB,comptC)
-# Affichage d'une fiche rÈsumÈ ‡ un moment donnÈ :
-entrepot.affichageGraphique(comptA,comptB,comptC,entrepot.tailleMax)
+#type choisi dans le compteur
+typ="rA"
+
+# Cr√©ation de la fen√™tre principale (main window)
+fenetreEntrepot = Tk()
+fenetreEntrepot.title('Entrep√¥t')
+
+# Cr√©ation d'un widget Button (bouton Actualiser)
+BoutonLancer = Button(fenetreEntrepot, text ='Actualiser', command = entrepot.actualiserInterface)
+# Positionnement du widget avec la m√©thode pack()
+BoutonLancer.pack(side = BOTTOM, padx = 5, pady = 5)
+
+# Cr√©ation d'un widget Button (bouton Quitter)
+BoutonQuitter = Button(fenetreEntrepot, text ='Quitter', command = fenetreEntrepot.destroy)
+BoutonQuitter.pack(side = BOTTOM, padx = 5, pady = 5)
+
+Texte = StringVar()
+Texte2 = StringVar()
+Texte3 = StringVar()
+entrepot.initialisationInterface()
+
+#Sp√©cification de la fen√™tre, et s√©paration en 3 labels distincts pour s√©parer les 3 types de pi√®ces
+p = PanedWindow(fenetreEntrepot, orient=HORIZONTAL)
+p.pack(side=TOP, expand=Y, fill=BOTH, pady=2, padx=2)
+# Label des pi√®ces A
+p.add(Label(p, textvariable=Texte, background='blue', anchor=CENTER))
+# Label des pi√®ces B
+p.add(Label(p, textvariable=Texte2, background='red', anchor=CENTER))
+# Label des pi√®ces C
+p.add(Label(p, textvariable=Texte3, background='lightgreen', anchor=CENTER))
+
+Mafenetre.mainloop()
