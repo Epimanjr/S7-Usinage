@@ -43,7 +43,7 @@ def receive(file, type):
         # Parcours de la liste
         for i in range(0,len(Message.listeMessages)-1):
             mess = Message.listeMessages[i]
-            if mess.file == file and mess.type == type:
+            if mess.file == file and (mess.type == type or type == -1) :
                 trouve = True
                 print("[SUP] Un message de la file "+mess.file+" a été reçu donc supprimé de la liste.")
                 Message.listeMessages.pop(i)
