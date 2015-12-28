@@ -3,6 +3,7 @@
 import os
 import sys
 import random
+import Message
 
 class Piece: #creation de l'objet pièce
 
@@ -17,26 +18,31 @@ class Piece: #creation de l'objet pièce
                 typeMachine = "mA"
             else:
                 typeMachine = "mB"
-            print("fileMachine ; "+typeMachine+" ; "+self.type)
+            #print("fileMachine ; "+typeMachine+" ; "+self.type)
+            Message.send("fileMachine",typeMachine,self.type)
 
         #Méthode qui affiche les informations sur la pièce
         def afficher(self):
             print("Je suis une pièce de type : "+self.type);
 
 
-i=0
-while i<11:
-    #génération aléatoire d'une pièce
-    rand = random.randint(0,2);
-    if rand == 0:
-        typePiece = "pA"
-    else:
-        if rand == 1:
-            typePiece = "pB"
+def processusPieces():
+    i=0
+    while i<20:
+        #génération aléatoire d'une pièce
+        rand = random.randint(0,2);
+        if rand == 0:
+            typePiece = "pA"
         else:
-                typePiece = "pC"
-    piece = Piece(typePiece);
-    piece.afficher();
-    #envoit de la pièce
-    piece.envoyerPiece();
-    i=i+1;
+            if rand == 1:
+                typePiece = "pB"
+            else:
+                    typePiece = "pC"
+        piece = Piece(typePiece);
+        #piece.afficher();
+        #envoit de la pièce
+        piece.envoyerPiece();
+        i=i+1;
+    # Message.afficherListeMessages()
+
+processusPieces()
