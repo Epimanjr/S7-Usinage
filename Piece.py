@@ -3,6 +3,7 @@
 import os
 import sys
 import random
+import time
 import Message
 
 class Piece: #creation de l'objet pièce
@@ -26,9 +27,9 @@ class Piece: #creation de l'objet pièce
             print("Je suis une pièce de type : "+self.type);
 
 
-def processusPieces():
+def processusPieces(nb):
     i=0
-    while i<20:
+    while i<nb:
         #génération aléatoire d'une pièce
         rand = random.randint(0,2);
         if rand == 0:
@@ -45,4 +46,4 @@ def processusPieces():
         i=i+1;
     # Message.afficherListeMessages()
 
-processusPieces()
+#processusPieces()

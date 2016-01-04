@@ -91,12 +91,12 @@ class Machine: #Création de notre objet Machine
 #machineB.afficher();
 
 
-def processusMachine(nom, listePiecesTraitables, listeAutresMachines):
+def processusMachine(nom, listePiecesTraitables, listeAutresMachines, nb):
     print("LISTE DES MESSAGES INITIALE")
     Message.afficherListeMessages()
     machine = Machine(nom, listePiecesTraitables, listeAutresMachines)
     i = 0
-    while i<20:
+    while i<nb:
         machine.fonctionner()
         i = i + 1
         print(" ");
@@ -104,4 +104,4 @@ def processusMachine(nom, listePiecesTraitables, listeAutresMachines):
     Message.afficherListeMessages()
 
 
-processusMachine("mA",["pA", "pB"],["mB"])
+#processusMachine("mA",["pA", "pB"],["mB"])
